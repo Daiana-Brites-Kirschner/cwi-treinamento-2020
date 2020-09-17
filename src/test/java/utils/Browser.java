@@ -1,12 +1,9 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
@@ -16,16 +13,16 @@ public class Browser {
     public static WebDriver getCurrentDriver(){ //cuidar para instanciar um drive de cada vez
         if(driver == null){
             try {
-                ChromeOptions capability = new ChromeOptions();
-                capability.addArguments("--no-sandbox");
-//                capability.addArguments("--disable-dev-shm-usage");
+                //ChromeOptions capability = new ChromeOptions();
+                //driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capability);
 
-                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capability);
+                System.setProperty("webdriver.chrome.driver", "/home/willian/Downloads/chromedriver_linux64/chromedriver");
+                driver = new ChromeDriver();
+
                 wait = new WebDriverWait(driver,30);
                 driver.manage().window().maximize();
                 driver.manage().timeouts().pageLoadTimeout( 30, TimeUnit.SECONDS);
-
-            } catch (MalformedURLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
