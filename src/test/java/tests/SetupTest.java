@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -8,10 +10,11 @@ import utils.Browser;
 import utils.Utils;
 
 import static org.junit.Assert.*;
-
+@Feature("Testes de site de e-commerce")
 public class SetupTest extends BaseTests {
 
     @Test
+    @Story("Abrir o site")
     public void testOpeningBrowserAndLoadingPage() {
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
         System.out.println("Abrimos o navegador e carregamos a URL!");
@@ -43,6 +46,7 @@ public class SetupTest extends BaseTests {
     }
 
     @Test
+    @Story("Realizar o login")
     public void testLogin(){
         Browser.getCurrentDriver().findElement(By.className("login")).click();
         System.out.println("Clicou em Sign In e direcionou para a página de login");

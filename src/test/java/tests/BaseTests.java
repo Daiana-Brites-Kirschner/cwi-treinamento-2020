@@ -5,8 +5,6 @@ import org.junit.Before;
 import utils.Browser;
 import utils.Utils;
 
-import javax.rmi.CORBA.Util;
-
 public class BaseTests {
     @Before
     public void setup(){
@@ -14,6 +12,7 @@ public class BaseTests {
     }
     @After
     public void tearDown(){
+        Browser.print();
         Browser.close();
     }
 }
