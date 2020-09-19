@@ -25,4 +25,9 @@ public class SearchPage extends SearchPageElementMapper {
     public String getTextHeading_counter() {
         return heading_counter.getText();
     }
+
+    public void clickProductImage(){
+        product_image.click();
+    }
 }
+

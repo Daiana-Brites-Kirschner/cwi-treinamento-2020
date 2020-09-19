@@ -3,10 +3,7 @@ package tests;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
-import pageObjects.MyAccountPage;
-import pageObjects.SearchPage;
+import pageObjects.*;
 import utils.Browser;
 import utils.Utils;
 
@@ -78,5 +75,39 @@ public class SetupTest extends BaseTests {
         // precisa remover as aspas duplas que vem junto do site
         assertEquals(search.getTextLighter().replace("\"",""), quest);
         assertThat(search.getTextHeading_counter(), CoreMatchers.containsString(questResultQtd));
+    }
+    @Test
+    public void testSearchDesafio() {
+        String quest = "T-SHIRTS";
+        String questResultQtd = "1";
+        String questResultQtdCart = "1";
+
+        //Iniciar as páginas   PageObjects
+        HomePage home = new HomePage();
+        SearchPage search = new SearchPage();
+        ProductPage product = new ProductPage();
+        CartPage cart = new CartPage();
+
+        // fazer a pesquisa
+        home.doSearch(quest);
+
+        assertTrue(search.isSearchPage());
+        // precisa remover as aspas duplas que vem junto do site
+        assertEquals(search.getTextLighter().replace("\"",""), quest);
+        assertThat(search.getTextHeading_counter(), CoreMatchers.containsString(questResultQtd));
+        //clicar no produto pesquisado
+        search.clickProductImage();
+        System.out.println("clicou no quick view");
+        //Validar se está na página correta do Produto selecionado
+        assertTrue(product.isProducPage());
+        System.out.println("Produto foi selecionado corretamente");
+        //Colocar o produto no carrinho
+        product.clickBtnAddToCart();
+        System.out.println("Produto foi selecionado no carrinho");
+        product.clickBtnProcedToCheckout();
+        System.out.println("Clicado para finalizar a compra");
+        //Validar que produto foi adicionado no carrinho
+        assertTrue(cart.isCartPage());
+        assertThat(cart.getTextSummary_products_quantity(),CoreMatchers.containsString(questResultQtdCart));
     }
 }

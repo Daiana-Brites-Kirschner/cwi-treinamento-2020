@@ -14,4 +14,7 @@ public class SearchPageElementMapper {
     @FindBy(className = "heading-counter")
     public WebElement heading_counter;
 
+    @FindBy(xpath = "//*[@id=\"center_column\"]/ul/li/div/div[1]/div/a[1]/img")
+    public WebElement product_image;
+
 }
