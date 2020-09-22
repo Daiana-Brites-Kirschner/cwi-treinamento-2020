@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
@@ -10,6 +11,7 @@ import utils.Browser;
 import utils.Utils;
 
 import static org.junit.Assert.*;
+
 @Feature("Testes de site de e-commerce")
 public class SetupTest extends BaseTests {
 
@@ -114,4 +116,34 @@ public class SetupTest extends BaseTests {
         assertTrue(cart.isCartPage());
         assertThat(cart.getTextSummary_products_quantity(),CoreMatchers.containsString(questResultQtdCart));
     }
+
+    @Test
+    @Story("Criar um usuário")
+    @Description("Acessar a página inicial e criar um usuário para realizar as compras")
+    public void testCriarUsuario(){
+        // Inicia as páginas
+        HomePage home = new HomePage();
+        LoginPage login = new LoginPage();
+        AccountCreationPage account = new AccountCreationPage();
+        MyAccountPage myAccountPage = new MyAccountPage();
+        // Clicar no botão "Sign in" da home
+        home.clickBtnLogin();
+        System.out.println("Clicamos no botão login");
+        // Verificação se ao clicar no botão login da Home ocorreu o direcionamento para a página de login e Criação de Página
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains("my-account"));
+        assertTrue(login.isPageLogin());
+        System.out.println("Direcionamento para página para criação de usuário está OK!.");
+        // Colar email pessoal e clicar para criar usuário
+        login.doCreateUser();
+        System.out.println("Solicitando um usuário");
+        // Verificação o direcionamento para a página de minha conta ao realizar o login
+        account.isAccounCreationPage();
+        //Colocar Dados Pessoais e clilcar em criar usuário
+        account.doCreateAccount();
+        System.out.println("Criamos o usuário");
+        //Validação da criação de usuário
+        assertTrue(myAccountPage.isPageMyAccount());
+        System.out.println("Direcionamento para página de login.");
+    }
+
 }

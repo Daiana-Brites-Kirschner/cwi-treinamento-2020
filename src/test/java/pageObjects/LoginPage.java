@@ -20,4 +20,11 @@ public class LoginPage extends LoginPageElementMapper {
         imput_password.sendKeys("teste123");
         submit_login.click();
     }
+
+    @Step("Colocar e-mail e clicar em criar usuário")
+    public void doCreateUser() {
+        imput_email_create.sendKeys("daia.brites1@gmail.com");
+        submit_create.click();
+    }
+
 }

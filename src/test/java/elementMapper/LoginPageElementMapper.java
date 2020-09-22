@@ -16,4 +16,11 @@ public class LoginPageElementMapper {
 
     @FindBy(name = "SubmitLogin")
     public WebElement submit_login;
+
+    @FindBy(id = "email_create")
+    public WebElement imput_email_create;
+
+    @FindBy(id = "SubmitCreate")
+    public WebElement submit_create;
+
 }
