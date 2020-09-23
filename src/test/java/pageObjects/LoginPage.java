@@ -5,6 +5,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
+import java.util.Random;
+
 public class LoginPage extends LoginPageElementMapper {
 
     public LoginPage() {
@@ -23,7 +25,10 @@ public class LoginPage extends LoginPageElementMapper {
 
     @Step("Colocar e-mail e clicar em criar usuário")
     public void doCreateUser() {
-        imput_email_create.sendKeys("daia.brites1@gmail.com");
+        //Adiciona um numero no e-mail para criar usuários diferentes
+        Random random = new Random();
+        int numero = random.nextInt(100);
+        imput_email_create.sendKeys("user.cwi" + numero + "@gmail.com");
         submit_create.click();
     }
 
